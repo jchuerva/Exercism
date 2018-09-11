@@ -5,15 +5,20 @@ class Squares
   end
 
   def square_of_sum
-    (1..@number).inject(0, :+)**2
+    number_list.sum.abs2
   end
 
   def sum_of_squares
-    (1..@number).collect { |i| i**2 }.inject(0, :+)
+    number_list.collect { |i| i.abs2 }.sum
   end
 
   def difference
     square_of_sum - sum_of_squares
+  end
+
+  private
+  def number_list
+    1..@number
   end
 
 end

@@ -1,5 +1,4 @@
 class Squares
-
   def initialize(number)
     @number = number
   end
@@ -17,8 +16,8 @@ class Squares
   end
 
   private
+
   def number_list
     1..@number
   end
-
 end

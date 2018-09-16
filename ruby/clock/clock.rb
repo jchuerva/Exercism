@@ -2,11 +2,12 @@ class Clock
   attr_reader :hours
   attr_reader :minutes
 
-  def initialize(h)
-    hours, minutes = ini_time(h)
+  ONE_DAY = 24 * 60
 
-    dh, @minutes = minutes.divmod(60)
-    @hours = (hours + dh) % 24
+  def initialize(hour: 0, minute: 0)
+    total_minutes = (hour * 60) + minute
+    @hours = min(total_minutes) / 60
+    @minutes = min(total_minutes) % 60
   end
 
   def to_s
@@ -27,9 +28,7 @@ class Clock
 
   private
 
-  def ini_time(h)
-    hours = h[:hour] || 0
-    min = h[:minute] || 0
-    [hours, min]
+  def min(total_min)
+    total_min % ONE_DAY
   end
 end

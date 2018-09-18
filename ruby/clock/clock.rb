@@ -12,11 +12,11 @@ class Clock
   end
 
   def +(other)
-    Clock.new(hour: hours, minute: minutes + other.total_minutes)
+    Clock.new(minute: total_minutes + other.total_minutes)
   end
 
   def -(other)
-    Clock.new(hour: hours, minute: minutes - other.total_minutes)
+    Clock.new(minute: total_minutes - other.total_minutes)
   end
 
   def ==(other)
@@ -24,6 +24,7 @@ class Clock
   end
 
   private
+
   def hours
     total_minutes % ONE_DAY_IN_MIN / 60
   end

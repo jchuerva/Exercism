@@ -41,7 +41,7 @@ class IsogramTest < Minitest::Test
   end
 
   def test_word_with_duplicated_character_in_mixed_case_lowercase_first
-    skip
+    # skip
     input = "alphAbet"
     refute Isogram.isogram?(input), "Expected false, '#{input}' is not an isogram"
   end
@@ -53,7 +53,7 @@ class IsogramTest < Minitest::Test
   end
 
   def test_isogram_with_duplicated_hyphen
-    skip
+    # skip
     input = "six-year-old"
     assert Isogram.isogram?(input), "Expected true, '#{input}' is an isogram"
   end

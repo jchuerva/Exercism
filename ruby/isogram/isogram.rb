@@ -9,10 +9,10 @@ module Isogram
 end
 
 # module Isogram
-#   VERSION = '1b'
+#   VERSION = '1c'
 
 #   def self.isogram?(input)
-#     letters = 'abcdefghijklmnopqrstuvwxyz'
-#     letters.chars.none? { |l| input.downcase.count(l) >= 2 }
+#     a = input.downcase.delete("^a-z")
+#     a.chars.none? { |l| a.count(l) >= 2}
 #   end
 # end

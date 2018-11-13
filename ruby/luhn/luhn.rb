@@ -1,14 +1,18 @@
 # Module Luhn comment
 module Luhn
+  VERSION = 2
   def self.valid?(number)
-    number.delete!(' ')
-    return false if number.size < 2 || number =~ /[A-Za-z]/ || number =~ (/\D/)
+    return false if invalid_luhn_format?(number)
 
-    check = check_luhn(number)
-    (sum_number(check) % 10).zero?
+    (luhn_number(number) % 10).zero?
   end
 
-  private_class_method def self.check_luhn(number)
+  private_class_method def self.invalid_luhn_format?(number)
+    number.delete!(' ')
+    number.size < 2 || number =~ /[A-Za-z]/ || number =~ /\D/
+  end
+
+  private_class_method def self.array_luhn(number)
     number.scan(/\d/).reverse.map.with_index do |num, index|
       if index.odd?
         double_num = num.to_i * 2
@@ -19,7 +23,7 @@ module Luhn
     end
   end
 
-  private_class_method def self.sum_number(number)
-    number.inject(0, :+)
+  private_class_method def self.luhn_number(number)
+    array_luhn(number).sum
   end
 end

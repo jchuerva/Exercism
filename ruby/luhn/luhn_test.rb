@@ -73,4 +73,11 @@ class LuhnTest < Minitest::Test
     # skip
     refute Luhn.valid?(":9")
   end
+
+  def test_a_valid_canadian_sin
+    num = "055 444 285"
+    assert Luhn.valid?(num)
+    # checking validity should not change our variable
+    assert num == "055 444 285"
+  end
 end

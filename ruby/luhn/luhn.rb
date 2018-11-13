@@ -1,6 +1,6 @@
 # Module Luhn comment
 module Luhn
-  VERSION = 2
+  VERSION = 3
   def self.valid?(number)
     return false if invalid_luhn_format?(number)
 
@@ -8,8 +8,8 @@ module Luhn
   end
 
   private_class_method def self.invalid_luhn_format?(number)
-    number.delete!(' ')
-    number.size < 2 || number =~ /[A-Za-z]/ || number =~ /\D/
+    num = number.delete(' ')
+    num.size < 2 || num =~ /[A-Za-z]/ || num =~ /\D/
   end
 
   private_class_method def self.array_luhn(number)

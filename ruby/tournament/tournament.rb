@@ -73,10 +73,6 @@ class Tournament
       @p = 0
     end
 
-    def <=>(other)
-      other.p <=> p
-    end
-
     def add_win
       @mp += 1
       @w += 1
@@ -97,5 +93,5 @@ class Tournament
 end
 
 module Version
-  VERSION = 1
+  VERSION = 2
 end

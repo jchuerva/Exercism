@@ -3,15 +3,17 @@ class Tournament
 
   def self.tally(input)
     @teams = {}
-    input.split("\n").each { |i| teams(i) }
+    input.each_line { |s| teams(remove_new_line(s)) } unless input == "\n"
     results(sort_results)
   end
 
-  def self.teams(input)
-    t_names = teams_and_result(input)[0]
-    result = teams_and_result(input)[1]
+  def self.remove_new_line(sentence)
+    sentence.gsub("\n",'')
+  end
 
-    # create_or_find_team
+  def self.teams(input)
+    (t_names, result) = teams_and_result(input)
+
     create_team(t_names)
 
     # add points
@@ -20,28 +22,44 @@ class Tournament
 
   def self.results(results)
     output = "Team                           | MP |  W |  D |  L |  P\n"
-    results.each { |r|
-      output += "#{r.name.ljust(30)} | #{r.mp.to_s.rjust(2)} | #{r.w.to_s.rjust(2)} | #{r.d.to_s.rjust(2)} | #{r.l.to_s.rjust(2)} | #{r.p.to_s.rjust(2)}\n" }
-    output
+    output + results.map { |team| attributes(team) + "\n" }.join
+  end
+
+  def self.attributes(team)
+    # calculate points just before print out the attributes
+    team.points = team.calculate_points
+    # print each attribute
+    team.instance_variables.map { |attr| get_attribute(team, attr) }.join(' | ')
+  end
+
+  def self.get_attribute(team, attr)
+    # convert symbol to str
+    if attr.to_s.tr(":@",'') == 'name'
+      team.instance_variable_get(attr).ljust(30)
+    else
+      team.instance_variable_get(attr).to_s.rjust(2)
+    end
   end
 
   def self.sort_results
-    @teams.values.sort_by { |i| [ -i.p, i.name ] }
+    @teams.values.sort_by { |i| [-i.calculate_points, i.name] }
   end
 
   def self.points(t_names, result)
+    t_home = find_team(t_names[0])
+    t_away = find_team(t_names[1])
     case result
     when 'win'then
-      find_team(t_names[0]).add_win
-      find_team(t_names[1]).add_loss
+      t_home.add_win
+      t_away.add_loss
     when 'loss' then
-      find_team(t_names[0]).add_loss
-      find_team(t_names[1]).add_win
+      t_home.add_loss
+      t_away.add_win
     when 'draw' then
-      find_team(t_names[0]).add_draw
-      find_team(t_names[1]).add_draw
+      t_home.add_draw
+      t_away.add_draw
     else
-      puts "Invalid format"
+      raise "Invalid format"
     end
   end
 
@@ -56,42 +74,44 @@ class Tournament
   end
 
   def self.teams_and_result(input)
-    teams = input.split(';')[0..1]
-    result = input.split(';')[2]
+    dev_input = input.split(';')
+    teams = dev_input[0..1]
+    result = dev_input[2]
     [teams, result]
   end
 
   # Team class comment
   class Team
-    attr_accessor :name, :mp, :w, :d, :l, :p
+    attr_accessor :name, :matches_played, :win, :draw, :lost, :points
     def initialize(name)
       @name = name
-      @mp = 0
-      @w = 0
-      @d = 0
-      @l = 0
-      @p = 0
+      @matches_played = 0
+      @win = 0
+      @draw = 0
+      @lost = 0
     end
 
     def add_win
-      @mp += 1
-      @w += 1
-      @p += 3
+      @matches_played += 1
+      @win += 1
     end
 
     def add_loss
-      @mp += 1
-      @l += 1
+      @matches_played += 1
+      @lost += 1
     end
 
     def add_draw
-      @mp += 1
-      @d += 1
-      @p += 1
+      @matches_played += 1
+      @draw += 1
+    end
+
+    def calculate_points
+      win * 3 + draw
     end
   end
 end
 
 module Version
-  VERSION = 2
+  VERSION = 3
 end

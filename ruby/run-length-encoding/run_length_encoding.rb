@@ -1,11 +1,17 @@
 # RunLenghtEncoding class comment
 class RunLengthEncoding
-  VERSION = 1
+  VERSION = 2
   def self.encode(input)
-    input.chars.chunk { |c| c }.map { |c, seq| seq.length == 1 ? "#{c}" : "#{seq.length}#{c}" }.join
+    suma = ''
+    input.chars.chunk { |c| c }.each { |c, seq| suma += char_and_count(c, seq) }
+    suma
   end
 
   def self.decode(input)
-    input.scan(/(\d+)?(.)/).map { |len, c| len.nil? ? c : c * len.to_i }.join
+    input.scan(/(\d+)?(.)/).map { |len, c| c * (len || 1).to_i }.join
+  end
+
+  private_class_method def self.char_and_count(c, seq)
+    seq.length == 1 ? c.to_s : "#{seq.length}#{c}"
   end
 end

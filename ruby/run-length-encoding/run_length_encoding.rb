@@ -1,10 +1,8 @@
 # RunLenghtEncoding class comment
 class RunLengthEncoding
-  VERSION = 2
+  VERSION = 3
   def self.encode(input)
-    suma = ''
-    input.chars.chunk { |c| c }.each { |c, seq| suma += char_and_count(c, seq) }
-    suma
+    input.chars.chunk { |c| c }.map { |i| char_and_count(i[0],i[1]) }.sum('')
   end
 
   def self.decode(input)
@@ -12,6 +10,7 @@ class RunLengthEncoding
   end
 
   private_class_method def self.char_and_count(c, seq)
-    seq.length == 1 ? c.to_s : "#{seq.length}#{c}"
+    length = seq.length == 1 ? nil : seq.length
+    "#{length}#{c}"
   end
 end

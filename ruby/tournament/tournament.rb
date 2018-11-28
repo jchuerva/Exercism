@@ -16,6 +16,7 @@ class Tournament
     results(sort_results)
   end
 
+  private 
   def remove_new_line(sentence)
     sentence.gsub("\n",'')
   end
@@ -106,7 +107,6 @@ class Tournament
     [teams, result]
   end
 
-  private
   # Team class comment
   class Team
     attr_accessor :name, :matches_played, :win, :draw, :lost, :points
@@ -144,5 +144,5 @@ class Tournament
 end
 
 module Version
-  VERSION = 5
+  VERSION = 6
 end

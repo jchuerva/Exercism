@@ -1,13 +1,14 @@
 class Matrix(object):
     def __init__(self, matrix_string):
-        self.matrix = matrix_string.split("\n")
+        self.rows = [[int(i) for i in r.split()] for r in matrix_string.split("\n")]
+        self.columns = [list(l) for l in zip(*self.rows)]
 
-    def row(self, index):
-        return [int(x) for x in self.matrix[index - 1].split()]
+    def row(self, row_number):
+        return self.rows[row_number - 1]
 
-    def column(self, index):
-        return [self.row(i)[index - 1] for i in range(1, len(self.matrix) + 1)]
+    def column(self, column_number):
+        return self.columns[column_number - 1]
 
 
 def version():
-    VERSION = 1
+    VERSION = 2

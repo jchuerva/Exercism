@@ -11,4 +11,3 @@ class Matrix(object):
 
 def version():
     VERSION = 1
-

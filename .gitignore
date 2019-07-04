@@ -1,5 +1,3 @@
 .vscode
 .pytest_cache
 *.pyc
-python/venv
-python/requirements.txt

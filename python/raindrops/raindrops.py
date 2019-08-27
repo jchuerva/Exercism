@@ -1,13 +1,10 @@
-from functools import reduce
-
-
 def convert(number):
     message = ""
-    if 3 in factors(number):
+    if number % 3 == 0:
         message += "Pling"
-    if 5 in factors(number):
+    if number % 5 == 0:
         message += "Plang"
-    if 7 in factors(number):
+    if number % 7 == 0:
         message += "Plong"
 
     if not message:
@@ -16,9 +13,5 @@ def convert(number):
         return message
 
 
-def factors(n):
-    return set(reduce(list.__add__, ([i, n//i] for i in range(1, int(n**0.5) + 1) if n % i == 0)))
-
-
 def version():
-    VERSION = 1
+    VERSION = 2

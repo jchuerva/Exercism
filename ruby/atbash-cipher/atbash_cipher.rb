@@ -20,5 +20,5 @@ class Atbash
 end
 
 module Version
-  VERSION = 2
+  VERSION = 1
 end

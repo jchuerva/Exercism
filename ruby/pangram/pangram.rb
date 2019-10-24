@@ -1,6 +1,7 @@
 # Pangram module comment
 module Pangram
-  LETTERS = 'abcdefghijklmnopqrstuvwxyz'.freeze
+  # LETTERS = 'abcdefghijklmnopqrstuvwxyz'.freeze
+  LETTERS = ('a'..'z').to_a.join('').freeze
 
   def self.pangram?(sentence)
     paragram = false

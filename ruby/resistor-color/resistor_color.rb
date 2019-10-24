@@ -5,11 +5,13 @@ require 'pry'
 class ResistorColor
   COLORS = %w[black brown red orange yellow green blue violet grey white].freeze
 
-  def self.color_code(input)
-    COLORS.index(input)
+  class << self
+    def color_code(input)
+      COLORS.index(input)
+    end
   end
 end
 
 module Version
-  VERSION = 1
+  VERSION = 2
 end

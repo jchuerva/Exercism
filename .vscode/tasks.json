@@ -1,0 +1,37 @@
+{
+  // See https://go.microsoft.com/fwlink/?LinkId=733558
+  // for the documentation about the tasks.json format
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "launch RUBY for CURRENT FILE",
+      "group": "test",
+      "type": "shell",
+      "command": "ruby -r minitest/pride ${file}",
+      "problemMatcher": [],
+      "presentation": {
+        "clear": true
+      }
+    },
+    {
+      "label": "launch PYTHON for CURRENT FILE",
+      "group": "test",
+      "type": "shell",
+      "command": "pytest ${file}",
+      "problemMatcher": [],
+      "presentation": {
+        "clear": true
+      }
+    },
+    {
+      "label": "launch GO test for CURRENT FILE",
+      "group": "test",
+      "type": "shell",
+      "command": "cd ${fileDirname}; go test",
+      "problemMatcher": [],
+      "presentation": {
+        "clear": true
+      }
+    }
+  ]
+}

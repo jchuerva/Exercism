@@ -6,7 +6,6 @@
 package triangle
 
 import "math"
-// import "fmt"
 
 
 // Notice KindFromSides() returns this type. Pick a suitable data type.

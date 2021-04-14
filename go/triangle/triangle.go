@@ -36,7 +36,7 @@ func isInvalidTriangle(a, b, c float64) bool {
 	return false
 }
 
-// KindFromSides should have a comment documenting it.
+// KindFromSides returns the Kind of a triangle given the lengths of its three sides.
 func KindFromSides(a, b, c float64) Kind {
 	if isInvalidTriangle(a, b, c) {
 		return NaT

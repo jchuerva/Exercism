@@ -22,8 +22,13 @@ var translations = map[string]string{
 	"UGA": "STOP",
 }
 
-var ErrInvalidBase = errors.New("ErrInvalidBase")
-var ErrStop = errors.New("ErrStop")
+var (
+	ErrStop        error = errors.New("STOP")
+	ErrInvalidBase error = errors.New("ErrInvalidBase")
+)
+// var ErrInvalidBase = errors.New("ErrInvalidBase")
+// var ErrStop = errors.New("ErrStop")
+
 
 func FromCodon(codon string) (string, error) {
 	value, ok := translations[codon]
@@ -44,7 +49,7 @@ func FromRNA(input string) ([]string, error) {
 		if ok == ErrInvalidBase {
 			return result, ErrInvalidBase
 		} else if ok == ErrStop {
-			return result, nil
+			return result, nil // break
 		}
 		result = append(result, aminoacid)
 	}

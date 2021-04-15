@@ -1,6 +1,5 @@
 package accumulate
 
-// import "fmt"
 
 // Accumulate is a function that receives an array of strings and an operation
 // it returns the result of the operation applied to all the strings
@@ -12,15 +11,3 @@ func Accumulate(items []string, operation func(string) string) []string {
 	}
 	return result
 }
-
-
-
-
-
-
-
-
-
-
-
-

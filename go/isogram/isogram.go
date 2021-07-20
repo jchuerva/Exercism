@@ -6,7 +6,7 @@ import (
 )
 
 func Version() string {
-	return "2b"
+	return "3"
 }
 
 func IsIsogram(str string) bool {
@@ -16,16 +16,18 @@ func IsIsogram(str string) bool {
 
 	// lowercase the str
 	str = strings.ToLower(str)
+	chars := make(map[rune]bool)
 
 	// iterate over str and check if there are any duplicate letters
 	for _, c := range str {
 		// check if the unicode is a letter is much faster than using a regex
-		if unicode.IsLetter(rune(c)) {
-			if strings.Count(str, string(c)) > 1 {
-				return false
-			}
+		if !unicode.IsLetter(c) {
+			continue
 		}
+		if chars[c] {
+			return false
+		}
+		chars[c] = true
 	}
-
 	return true
 }

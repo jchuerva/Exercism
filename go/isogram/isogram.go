@@ -4,8 +4,10 @@ import "strings"
 import "regexp"
 
 func Version() string {
-	return "1"
+	return "2a"
 }
+
+var pattern = regexp.MustCompile("[^a-zA-Z0-9]+")
 
 func IsIsogram(str string) bool {
 
@@ -17,8 +19,7 @@ func IsIsogram(str string) bool {
 	str = strings.ToLower(str)
 
 	// remove non alphanumeric characters
-	reg, _ := regexp.Compile("[^a-zA-Z0-9]+")
-	trimStr := reg.ReplaceAllString(str, "")
+	trimStr := pattern.ReplaceAllString(str, "")
 
 	// iterate over str and check if there are any duplicate letters
 	for _, c := range trimStr {

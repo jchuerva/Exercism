@@ -6,17 +6,13 @@ import (
 )
 
 func Version() string {
-	return "3"
+	return "4"
 }
 
 func IsIsogram(str string) bool {
-	if len(str) == 0 {
-		return true
-	}
-
 	// lowercase the str
 	str = strings.ToLower(str)
-	chars := make(map[rune]bool)
+	chars := map[rune]bool{}
 
 	// iterate over str and check if there are any duplicate letters
 	for _, c := range str {

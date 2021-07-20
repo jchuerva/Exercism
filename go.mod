@@ -20,5 +20,5 @@ require (
 	github.com/spf13/cobra v1.1.3 // indirect
 	go.starlark.net v0.0.0-20210406145628-7a1108eaa012 // indirect
 	golang.org/x/arch v0.0.0-20210405154355-08b684f594a5 // indirect
-	golang.org/x/sys v0.0.0-20210415045647-66c3f260301c // indirect
+	golang.org/x/tools v0.1.5 // indirect
 )

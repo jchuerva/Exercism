@@ -1,16 +1,15 @@
 package isogram
 
-import "strings"
-import "regexp"
+import (
+	"strings"
+	"unicode"
+)
 
 func Version() string {
-	return "2a"
+	return "2b"
 }
 
-var pattern = regexp.MustCompile("[^a-zA-Z0-9]+")
-
 func IsIsogram(str string) bool {
-
 	if len(str) == 0 {
 		return true
 	}
@@ -18,13 +17,13 @@ func IsIsogram(str string) bool {
 	// lowercase the str
 	str = strings.ToLower(str)
 
-	// remove non alphanumeric characters
-	trimStr := pattern.ReplaceAllString(str, "")
-
 	// iterate over str and check if there are any duplicate letters
-	for _, c := range trimStr {
-		if strings.Count(trimStr, string(c)) > 1 {
-			return false
+	for _, c := range str {
+		// check if the unicode is a letter is much faster than using a regex
+		if unicode.IsLetter(rune(c)) {
+			if strings.Count(str, string(c)) > 1 {
+				return false
+			}
 		}
 	}
 

@@ -32,6 +32,16 @@
       "presentation": {
         "clear": true
       }
+    },
+    {
+      "label": "launch TYPESCRIPT test for CURRENT FILE",
+      "group": "test",
+      "type": "shell",
+      "command": "cd ${fileDirname}; yarn test",
+      "problemMatcher": [],
+      "presentation": {
+        "clear": true
+      }
     }
   ]
 }

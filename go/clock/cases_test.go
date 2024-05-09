@@ -9,7 +9,7 @@ var timeTests = []struct {
 	h, m int
 	want string
 }{
-	{8, 0, "08:00"},        // on the hour
+	{8, 0, "08:00"},				// on the hour
 	{11, 9, "11:09"},       // past the hour
 	{24, 0, "00:00"},       // midnight is zero hours
 	{25, 0, "01:00"},       // hour rolls over
